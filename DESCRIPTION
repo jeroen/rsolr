@@ -3,7 +3,7 @@ Type: Package
 Title: R to Solr Interface
 Version: 0.0.13
 Author: Michael Lawrence, Gabe Becker, Jan Vogel
-Maintainer: Michael Lawrence <michafla@gene.com>
+Maintainer: Michael Lawrence <lawremi@gmail.com>
 Description: A comprehensive R API for querying Apache Solr databases.
              A Solr core is represented as a data frame or list that
              supports Solr-side filtering, sorting,
