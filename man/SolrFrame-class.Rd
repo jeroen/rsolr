@@ -205,7 +205,7 @@
     \item{
       \code{core(x)}: Gets the \code{SolrCore} wrapped by \code{x}
     }
-    \code{
+    \item{
       \code{query(x)}: Gets the query that is being constructed by
       \code{x}
     }
