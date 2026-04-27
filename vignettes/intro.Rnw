@@ -67,7 +67,7 @@ dataset describes all of the airline flights departing New York City
 in 2013. It is provided by the \texttt{nycflights13} package, so please see
 its documentation for more details.
 <<checkDeps, echo = FALSE, results = "hide">>=
-if (is.na(suppressWarnings(packageDescription("nycflights13")))) {
+if (!requireNamespace("nycflights13", quietly = TRUE)) {
     knitr::opts_chunk$set(eval = FALSE)
     message("Package nycflights13 not installed: not evaluating code chunks.")
 }
