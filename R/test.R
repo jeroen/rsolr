@@ -178,6 +178,9 @@ setClassUnion("SolrSchemaORNULL", c("SolrSchema", "NULL"))
                 },
                 isRunning = function() {
                   portIsOpen(uriPort(uri))
+                },
+                finalize = function() {
+                  suppressWarnings(try(.self$kill(), silent=TRUE))
                 }))
 
 TestSolr <- function(schema = NULL, start = TRUE, restart=FALSE)
