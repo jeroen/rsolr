@@ -477,7 +477,8 @@ setMethod("xtabs", "SolrQuery",
               useNA <- addNA ||
                   is.null(exclude) && identical(na.action, na.pass)
               if (!missing(subset)) {
-                  data <- rsolr::subset(data, .(substitute(subset)))
+                  subset.expr <- evalq(substitute(subset), parent.frame())
+                  data <- rsolr::subset(data, .(subset.expr))
               }
               facet(data, formula, useNA=useNA, drop=drop.unused.levels)
           })
