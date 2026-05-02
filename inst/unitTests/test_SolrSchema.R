@@ -9,6 +9,7 @@ test_SolrSchema_creation <- function() {
   checkIdentical(XML::saveXML(doc), XML::saveXML(schema))
 
   solr <- TestSolr(schema, restart=TRUE)
+  on.exit(solr$kill())
   sr <- SolrFrame(solr$uri)
   sr[] <- Cars93
   ## Differences: factors lost
@@ -24,6 +25,7 @@ test_SolrSchema_creation <- function() {
   
   schema <- deriveSolrSchema(Cars93, uniqueKey="Model")
   solr <- TestSolr(schema, restart=TRUE)
+  on.exit(solr$kill())
   sr <- SolrFrame(solr$uri)
   sr[] <- Cars93
   df <- as.data.frame(sr["Integra",])
