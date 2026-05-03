@@ -12,7 +12,6 @@ checkResponseEquals <- function(response, input, tolerance=1) {
 
 test_SolrQuery <- function() {
   solr <- TestSolr()
-  on.exit(solr$kill())
   s <- SolrList(solr$uri)
   sc <- core(s)
 

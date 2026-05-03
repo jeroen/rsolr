@@ -9,7 +9,6 @@ checkResponseEquals <- function(response, input, tolerance=1) {
 
 test_SolrList_accessors <- function() {
   solr <- TestSolr()
-  on.exit(solr$kill())
   s <- SolrList(solr$uri)
 
   checkEquals(SolrCore(solr$uri), core(SolrList(solr$uri)))
@@ -114,7 +113,6 @@ test_SolrList_accessors <- function() {
 
 test_SolrList_queries <- function() {
   solr <- rsolr:::TestSolr()
-  on.exit(solr$kill())
   s <- SolrList(solr$uri)
 
   docs <- list(

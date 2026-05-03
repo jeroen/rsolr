@@ -17,7 +17,6 @@ checkResponseEquals <- function(response, input, tolerance=1) {
 
 test_SolrFrame_accessors <- function() {
   solr <- rsolr:::TestSolr()
-  on.exit(solr$kill())
   s <- SolrFrame(solr$uri)
 
   checkEquals(SolrCore(solr$uri), core(s))
