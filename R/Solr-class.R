@@ -208,7 +208,8 @@ mergeGrouping <- function(x, y) {
 setMethod("xtabs", "Solr",
           function(formula, data,
                    subset, sparse = FALSE, 
-                   na.action, addNA = FALSE, exclude = if (!addNA) NA,
+                   na.action, na.rm = FALSE,
+                   addNA = FALSE, exclude = if (!addNA) c(NA, NaN),
                    drop.unused.levels = FALSE)
               {
                   core <- core(data)

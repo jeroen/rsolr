@@ -338,13 +338,13 @@ test_SolrQuery <- function() {
         tab
     }
     checkTable2 <- function(formula, subset, ...) {
-        tab <- xtabs(formula, df, exclude=NULL, ...)
-        fct <- facets(sc, xtabs(formula, query, exclude=NULL, ...))[[formula]]
+        tab <- xtabs(formula, df, ...)
+        fct <- facets(sc, xtabs(formula, query, ...))[[formula]]
         checkIdentical(as.table(fct), toTable(tab))
     }
 
 ### CHECK: missing
-    checkTable2(~ val_b, na.action=na.pass)
+    checkTable2(~ val_b, exclude=NULL)
 
 ### CHECK: nested facets
     checkTable2(~ cat_s + I(where_s == "NJ"))

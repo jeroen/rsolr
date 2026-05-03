@@ -443,12 +443,11 @@ grouped <- function(x) identical(params(x)$group, "true")
 ###
 
 ### NOTE: We only support 'exclude' for compatibility with
-###       xtabs(na.action=na.pass, exclude=NULL), but with our default,
-###       only 'na.action=na.pass' is needed for counting NAs.
+###       xtabs(na.action=na.pass, exclude=NULL).
 
 normNAAction <- function(na.action) {
     if (missing(na.action)) {
-        na.action <- getOption("na.action", na.omit)
+        na.action <- na.pass
     }
     na.action <- match.fun(na.action)
     if (!identical(na.action, na.omit) &&
@@ -462,7 +461,7 @@ setMethod("xtabs", "SolrQuery",
           function(formula, data,
                    subset, sparse = FALSE, 
                    na.action, na.rm = FALSE,
-                   addNA = FALSE, exclude = if (!addNA) NA,
+                   addNA = FALSE, exclude = if (!addNA) c(NA, NaN),
                    drop.unused.levels = FALSE) {
               if (!identical(sparse, FALSE)) {
                   stop("'sparse' must be FALSE")
@@ -474,9 +473,8 @@ setMethod("xtabs", "SolrQuery",
               if (!isTRUEorFALSE(addNA)) {
                   stop("'addNA' must be TRUE or FALSE")
               }
-              if (!is.null(exclude) &&
-                  !(length(exclude)==1L && is.na(exclude))) {
-                  stop("'exclude' should be 'NA' or 'NULL'")
+              if (!is.null(exclude) && !(identical(exclude, c(NA, NaN)))) {
+                  stop("'exclude' should be 'c(NA, NaN)' or 'NULL'")
               }
               useNA <- addNA ||
                   is.null(exclude) && identical(na.action, na.pass)
