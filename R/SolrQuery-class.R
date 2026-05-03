@@ -461,10 +461,14 @@ normNAAction <- function(na.action) {
 setMethod("xtabs", "SolrQuery",
           function(formula, data,
                    subset, sparse = FALSE, 
-                   na.action, addNA = FALSE, exclude = if (!addNA) NA,
+                   na.action, na.rm = FALSE,
+                   addNA = FALSE, exclude = if (!addNA) NA,
                    drop.unused.levels = FALSE) {
               if (!identical(sparse, FALSE)) {
                   stop("'sparse' must be FALSE")
+              }
+              if (!identical(na.rm, FALSE)) {
+                  stop("'na.rm' must be FALSE")
               }
               na.action <- normNAAction(na.action)
               if (!isTRUEorFALSE(addNA)) {
@@ -477,8 +481,7 @@ setMethod("xtabs", "SolrQuery",
               useNA <- addNA ||
                   is.null(exclude) && identical(na.action, na.pass)
               if (!missing(subset)) {
-                  subset.expr <- evalq(substitute(subset), parent.frame())
-                  data <- rsolr::subset(data, .(subset.expr))
+                  data <- rsolr::subset(data, .(substitute(subset)))
               }
               facet(data, formula, useNA=useNA, drop=drop.unused.levels)
           })
