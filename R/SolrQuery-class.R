@@ -95,7 +95,7 @@ QueryHandle <- setRefClass("QueryHandle",
 setMethod("show", "QueryHandle",
           function(object) cat("QueryHandle:", as.character(object), "\n"))
 
-as.character.QueryHandle <- function(x) x$i
+as.character.QueryHandle <- function(x, ...) x$i
 
 QueryHeap_store <- function(query) {
     key <- .self$nextKey()
